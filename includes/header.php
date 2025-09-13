@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION)) {
-    header("Location: index.php");
-}
 
 if (isset($_POST['logout'])) {
     session_destroy();
@@ -12,55 +9,143 @@ if (isset($_POST['logout'])) {
 
 include '../includes/koneksi.php';
 
-
 ?>
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        aside .menu {
-            padding: 10px;
-            border-radius: 10px;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
         }
-
-        aside .menu:hover {
-            background-color: #60A5FA1A;
-            color: #60A5FA;
+        
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .menu {
+            position: relative;
+            border-radius: 10000px;
+            font-weight: 500;
+            color: #64748b;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        
+        .menu:hover {
+            color: #3b82f6;
+            background-color: #3b82f610;
+        }
+    
+        
+        .logout-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+        }
+        
+        .menu-container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 8px;
         }
     </style>
 </head>
 
-<body class="flex">
-    <aside class="flex flex-col w-1/6 h-full border-r-1 p-4">
-        <div class="profile">
-            <h2 class="text-3xl"><?php echo $_SESSION['username']; ?></h2>
-            <h4><?php echo $_SESSION['role']; ?></h4>
+<body class="p-6">
+    <nav class="navbar flex items-center justify-between px-8 py-0 rounded-full mx-auto max-w-7xl">
+        <!-- logo -->
+        <div class="logo text-2xl">
+            Kasir
         </div>
-        <a href="dashboard.php" class="menu">Beranda</a>
 
-        <?php if ($_SESSION['role'] === 'admin'): ?>
-            <a href="meja.php" class="menu">Entri Meja</a>
-            <a href="menu.php" class="menu">Entri Menu</a>
-        <?php endif; ?>
+        <!-- menu tengah -->
+        <div class="menu-container">
+            <ul class="gap-2 flex items-center">
+                <li><a href="dashboard.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">Beranda</a></li>
+        
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                    <li><a href="meja.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-table text-sm"></i>
+                        Entri Meja
+                    </a></li>
+                    <li><a href="menu.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-utensils text-sm"></i>
+                        Entri Menu
+                    </a></li>
+                <?php endif; ?>
+        
+                <?php if ($_SESSION['role'] === 'waiter'): ?>
+                    <li><a href="menu.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-utensils text-sm"></i>
+                        Entri Menu
+                    </a></li>
+                    <li><a href="order.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-clipboard-list text-sm"></i>
+                        Entri Order
+                    </a></li>
+                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-chart-bar text-sm"></i>
+                        Laporan
+                    </a></li>
+                <?php endif; ?>
+        
+                <?php if ($_SESSION['role'] === 'kasir'): ?>
+                    <li><a href="transaksi.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-cash-register text-sm"></i>
+                        Entri Transaksi
+                    </a></li>
+                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-chart-bar text-sm"></i>
+                        Laporan
+                    </a></li>
+                <?php endif; ?>
+        
+                <?php if ($_SESSION['role'] === 'owner'): ?>
+                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                        <i class="fas fa-chart-bar text-sm"></i>
+                        Laporan
+                    </a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
 
-        <?php if ($_SESSION['role'] === 'waiter'): ?>
-            <a href="menu.php" class="menu">Entri Menu</a>
-            <a href="order.php" class="menu">Entri Order</a>
-            <a href="laporan.php" class="menu">Laporan</a>
-        <?php endif; ?>
-
-        <?php if ($_SESSION['role'] === 'kasir'): ?>
-            <a href="transaksi.php" class="menu">Entri Transaksi</a>
-            <a href="laporan.php" class="menu">Laporan</a>
-        <?php endif; ?>
-
-        <?php if ($_SESSION['role'] === 'owner'): ?>
-            <a href="laporan.php" class="menu">Laporan</a>
-        <?php endif; ?>
-
-        <form method="post" class="mt-4">
-            <button type="submit" name="logout" class="bg-red-500 w-full py-1 rounded-md text-white text-center">Log Out</button>
+        <!-- user -->
+        <form method="post">
+            <button type="submit" name="logout" class="logout-btn flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium">
+                <i class="fas fa-sign-out-alt text-sm"></i>
+                Log Out
+            </button>
         </form>
-    </aside>
+    </nav>
+    
     <script src="https://kit.fontawesome.com/54328c2d50.js" crossorigin="anonymous"></script>
 </body>
