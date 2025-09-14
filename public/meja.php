@@ -1,18 +1,13 @@
 <?php
-include '../includes/header.php';
-if (!isset($_SESSION["user_id"])) {
-    header("Location: index.php");
-}
 
-include '../includes/koneksi.php';
 
 // Tambah meja
 if (isset($_POST['tambah'])) {
     $nomor = $_POST['nomor_meja'];
     $status = $_POST['status'] ?? 'kosong';
 
-    $stmt = $conn->prepare("INSERT INTO meja (nomor_meja, status) VALUES (?, ?)");
-    $stmt->bind_param("ss", $nomor, $status);
+    $stmt = $koneksi->prepare("INSERT INTO meja (nomor_meja, status) VALUES (?, ?)");
+    $stmt->bind_param("is", $nomor, $status);
     $stmt->execute();
     $stmt->close();
 
@@ -23,7 +18,7 @@ if (isset($_POST['tambah'])) {
 // Hapus meja
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
-    $stmt = $conn->prepare("DELETE FROM meja WHERE id=?");
+    $stmt = $koneksi->prepare("DELETE FROM meja WHERE id=?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
@@ -38,17 +33,16 @@ if (isset($_POST['update'])) {
     $nomor = $_POST['nomer_meja'];
     $status = $_POST['status'];
 
-    $stmt = $conn->prepare("UPDATE meja SET nomor_meja=?, status=? WHERE id=?");
+    $stmt = $koneksi->prepare("UPDATE meja SET nomor_meja=?, status=? WHERE id=?");
     $stmt->bind_param("ssi", $nomor, $status, $id);
     $stmt->execute();
     $stmt->close();
 }
 
 
-$sql = "SELECT * FROM meja";
-$sql .= " ORDER BY nomor_meja ASC";
+$sql = "SELECT * FROM meja ORDER BY nomor_meja ASC";
 
-$stmt = $conn->prepare($sql);
+$stmt = $koneksi->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>

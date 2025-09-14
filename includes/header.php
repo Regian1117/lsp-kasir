@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 if (isset($_POST['logout'])) {
     session_destroy();
@@ -7,7 +6,7 @@ if (isset($_POST['logout'])) {
     exit();
 };
 
-include '../includes/koneksi.php';
+include 'config/koneksi.php';
 
 ?>
 
@@ -29,7 +28,7 @@ include '../includes/koneksi.php';
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
         }
         
         .logo {
@@ -66,8 +65,6 @@ include '../includes/koneksi.php';
         
         .logout-btn:hover {
             background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
         }
         
         .menu-container {
@@ -80,67 +77,65 @@ include '../includes/koneksi.php';
     </style>
 </head>
 
-<body class="p-6">
-    <nav class="navbar flex items-center justify-between px-8 py-0 rounded-full mx-auto max-w-7xl">
+<body>
+    <nav class="navbar mt-3 flex items-center justify-between px-8 py-2 rounded-full mx-auto max-w-7xl">
         <!-- logo -->
-        <div class="logo text-2xl">
-            Kasir
+        <div class="logo text-xl">
+            Kasir 
         </div>
 
         <!-- menu tengah -->
-        <div class="menu-container">
             <ul class="gap-2 flex items-center">
-                <li><a href="dashboard.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">Beranda</a></li>
+                <li><a href="?" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">Beranda</a></li>
         
                 <?php if ($_SESSION['role'] === 'admin'): ?>
-                    <li><a href="meja.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="?page=meja" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-table text-sm"></i>
                         Entri Meja
                     </a></li>
-                    <li><a href="menu.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="?page=menu" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-utensils text-sm"></i>
                         Entri Menu
                     </a></li>
                 <?php endif; ?>
         
                 <?php if ($_SESSION['role'] === 'waiter'): ?>
-                    <li><a href="menu.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="menu.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-utensils text-sm"></i>
                         Entri Menu
                     </a></li>
-                    <li><a href="order.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="order.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-clipboard-list text-sm"></i>
                         Entri Order
                     </a></li>
-                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-chart-bar text-sm"></i>
                         Laporan
                     </a></li>
                 <?php endif; ?>
         
                 <?php if ($_SESSION['role'] === 'kasir'): ?>
-                    <li><a href="transaksi.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="transaksi.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-cash-register text-sm"></i>
                         Entri Transaksi
                     </a></li>
-                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-chart-bar text-sm"></i>
                         Laporan
                     </a></li>
                 <?php endif; ?>
         
                 <?php if ($_SESSION['role'] === 'owner'): ?>
-                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-6 py-3 rounded-xl">
+                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-chart-bar text-sm"></i>
                         Laporan
                     </a></li>
                 <?php endif; ?>
             </ul>
-        </div>
 
         <!-- user -->
         <form method="post">
-            <button type="submit" name="logout" class="logout-btn flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium">
+            <button type="submit" name="logout" class="logout-btn flex items-center gap-2 px-4 py-2 rounded-full text-white font-medium">
                 <i class="fas fa-sign-out-alt text-sm"></i>
                 Log Out
             </button>
