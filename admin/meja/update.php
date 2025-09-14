@@ -13,6 +13,7 @@ if (isset($_POST["update"])) {
     $stmt = $koneksi->prepare($sql);
     $stmt->bind_param('isi', $nomor_meja, $status, $id);
     $stmt->execute();
+    $stmt->close();
     header('Location: index.php?page=meja');
     exit();
 }

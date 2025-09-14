@@ -15,31 +15,6 @@ if (isset($_POST['tambah'])) {
     exit();
 }
 
-// Hapus meja
-if (isset($_GET['hapus'])) {
-    $id = $_GET['hapus'];
-    $stmt = $koneksi->prepare("DELETE FROM meja WHERE id=?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $stmt->close();
-
-    header("Location: meja.php");
-    exit();
-}
-
-// Update meja
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $nomor = $_POST['nomer_meja'];
-    $status = $_POST['status'];
-
-    $stmt = $koneksi->prepare("UPDATE meja SET nomor_meja=?, status=? WHERE id=?");
-    $stmt->bind_param("ssi", $nomor, $status, $id);
-    $stmt->execute();
-    $stmt->close();
-}
-
-
 $sql = "SELECT * FROM meja ORDER BY nomor_meja ASC";
 
 $stmt = $koneksi->prepare($sql);
@@ -49,7 +24,7 @@ $result = $stmt->get_result();
 
 <div class="flex flex-col">
     <h2 class="text-2xl font-bold mb-6">Entri Meja</h2>
-
+    <a href="?page=meja&action=tambah" class="ml-2 bg-blue-500 text-white w-35 text-center p-2">+ Tambah Meja</a>
     <!-- Tabel Meja -->
     <div class="bg-white p-6 rounded shadow">
         <table class="w-full border-collapse">
@@ -75,7 +50,11 @@ $result = $stmt->get_result();
                                 <input type="hidden" name="status" value="<?= $row['status'] ?>" hidden>
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Edit</button>
                             </form>
-                            <button href="meja.php?hapus=<?= $row['id'] ?>" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" onclick="return confirm('Hapus meja ini?')">Hapus</button>
+                            <form action="?page=meja&action=hapus" method="post" class="inline">
+                                <input type="hidden" value="<?= $row['id'] ?>" name="id" hidden>
+                                <input type="hidden" name="nomor_meja" value="<?= $row['nomor_meja'] ?>" hidden>
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endwhile; ?>
