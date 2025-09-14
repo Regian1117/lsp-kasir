@@ -1,7 +1,4 @@
 <?php
-
-include 'includes/functions.php';
-
 $id = $_POST['id'];
 $kategori = $_POST['kategori'];
 $nama_menu = $_POST['nama_menu'];

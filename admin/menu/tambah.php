@@ -1,5 +1,4 @@
 <?php 
-include "includes/functions.php";
 if (isset($_POST['tambah'])) {
     $id = $_POST['id'];
     $kategori = $_POST['kategori'];

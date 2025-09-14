@@ -8,7 +8,7 @@ function isLogin() {
 
 function checkRole($allowedRoles = []) {
     if (!in_array($_SESSION['role'], $allowedRoles)) {
-        header("Location: dashboard.php");
+        header("Location: index.php");
         exit();
     }
 }

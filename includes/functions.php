@@ -48,4 +48,31 @@ function upload_foto($file, $targetDir, $namaInput, $maxSize = 2097152, $allowed
         return false;
     }
 }
+
+function generateKodeTransaksi($conn) {
+    // prefix + tanggal
+    $prefix = "TRX" . date("Ymd");
+
+    // cek transaksi terakhir hari ini
+    $sql = "SELECT kode_transaksi 
+            FROM transaksi 
+            WHERE kode_transaksi LIKE '$prefix%'
+            ORDER BY kode_transaksi DESC 
+            LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    $lastNumber = 0;
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        // ambil nomor urut terakhir
+        $lastCode = $row['kode_transaksi'];
+        $lastNumber = (int)substr($lastCode, -3); // ambil 3 digit terakhir
+    }
+
+    // tambah 1 nomor urut
+    $newNumber = str_pad($lastNumber + 1, 3, "0", STR_PAD_LEFT);
+
+    // hasil akhir
+    return $prefix . "-" . $newNumber;
+}
+
 ?>

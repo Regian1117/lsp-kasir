@@ -100,33 +100,33 @@ include 'config/koneksi.php';
                 <?php endif; ?>
         
                 <?php if ($_SESSION['role'] === 'waiter'): ?>
-                    <li><a href="menu.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
+                    <li><a href="?page=menu" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-utensils text-sm"></i>
                         Entri Menu
                     </a></li>
-                    <li><a href="order.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
+                    <li><a href="?page=pesanan" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-clipboard-list text-sm"></i>
-                        Entri Order
+                        Entri Pesanan
                     </a></li>
-                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
+                    <li><a href="?page=laporan" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-chart-bar text-sm"></i>
                         Laporan
                     </a></li>
                 <?php endif; ?>
         
                 <?php if ($_SESSION['role'] === 'kasir'): ?>
-                    <li><a href="transaksi.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
+                    <li><a href="?page=transaksi" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-cash-register text-sm"></i>
                         Entri Transaksi
                     </a></li>
-                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
+                    <li><a href="?page=laporan" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-chart-bar text-sm"></i>
                         Laporan
                     </a></li>
                 <?php endif; ?>
         
                 <?php if ($_SESSION['role'] === 'owner'): ?>
-                    <li><a href="laporan.php" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
+                    <li><a href="?page=laporan" class="menu flex items-center gap-2 px-4 py-2 rounded-xl">
                         <i class="fas fa-chart-bar text-sm"></i>
                         Laporan
                     </a></li>
