@@ -33,7 +33,7 @@ function upload_foto($file, $targetDir, $namaInput, $maxSize = 2097152, $allowed
     $namaInput = str_replace(' ', '_', $namaInput); // ganti spasi dengan _
 
     // generate nama baru: randomInt + namaInput + ekstensi
-    $randomInt = rand(1000, 9999);
+    $randomInt = rand(100, 999);
     $namaBaru = $randomInt . '_' . $namaInput . '.' . $ekstensi;
 
     // pastikan folder ada
@@ -43,7 +43,7 @@ function upload_foto($file, $targetDir, $namaInput, $maxSize = 2097152, $allowed
 
     // pindahkan file ke folder tujuan
     if(move_uploaded_file($tmpName, $targetDir . $namaBaru)){
-        return $namaBaru;
+        return $targetDir . $namaBaru;
     } else {
         return false;
     }
