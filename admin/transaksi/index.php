@@ -4,7 +4,7 @@ $stmt = $koneksi->prepare("
     FROM transaksi t 
     JOIN users u ON t.id_user = u.id 
     JOIN meja mj ON t.id_meja = mj.id 
-    ORDER BY t.kode_transaksi DESC
+    ORDER BY t.kode_transaksi asc
 ");
 $stmt->execute();
 $result = $stmt->get_result();
@@ -50,13 +50,19 @@ $result = $stmt->get_result();
                                 <input type="hidden" name="nama_pelanggan" value="<?= $row['nama_pelanggan'] ?>">
                                 <input type="hidden" name="id_meja" value="<?= $row['id_meja'] ?>">
                                 <input type="hidden" name="total" value="<?= $row['total'] ?>">
-                                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Edit</button>
+                                <button type="submit" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</button>
                             </form>
 
                             <!-- Form Hapus -->
                             <form method="post" action="?page=transaksi&action=hapus">
                                 <input type="hidden" name="id_transaksi" value="<?= $row['id'] ?>">
-                                <button type="submit" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Hapus</button>
+                                <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Hapus</button>
+                            </form>
+
+                            <!-- form print -->
+                            <form action="?page=transaksi&action=print" method="post">
+                                <input type="hidden" name="id" value="<?= $row['id']?>">
+                                <button type="submit" class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Print</button>
                             </form>
                         </td>
                     </tr>
