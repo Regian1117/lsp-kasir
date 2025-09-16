@@ -216,12 +216,12 @@ $minuman = getMenu('minuman');
             <form method="post" class="flex flex-col mt-2">
                 <select name="id_transaksi" id="idtr">
                     <?php
-                    $stmt = $koneksi->prepare("select id, kode_transaksi, id_meja from transaksi");
+                    $stmt = $koneksi->prepare("select t.id, t.kode_transaksi, m.nomor_meja from transaksi t join meja m on m.id=t.id_meja");
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()) {
                     ?>
-                        <option value="<?= $row['id'] ?>">kode : <?= $row['kode_transaksi'] ?> meja : <?= $row['id_meja'] ?></option>
+                        <option value="<?= $row['id'] ?>">kode : <?= $row['kode_transaksi'] ?> meja : <?= $row['nomor_meja'] ?></option>
                     <?php } ?>
                 </select>
                 <div class="mt-1 font-bold">Total: Rp <?= number_format($total, 0, ',', '.') ?></div>

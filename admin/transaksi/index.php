@@ -44,12 +44,11 @@ $result = $stmt->get_result();
                         <td class="px-4 py-2 border"><?= htmlspecialchars($row['created_at']) ?></td>
                         <td class="px-4 py-2 border space-x-2 flex justify-center">
                             <!-- Form Edit -->
-                            <form method="post" action="?page=transaksi&action=edit" class="inline">
+                            <form method="post" action="?page=transaksi&action=update" class="inline">
                                 <input type="hidden" name="id_transaksi" value="<?= $row['id'] ?>">
-                                <input type="hidden" name="kode_transaksi" value="<?= $row['kode_transaksi'] ?>">
                                 <input type="hidden" name="nama_pelanggan" value="<?= $row['nama_pelanggan'] ?>">
                                 <input type="hidden" name="id_meja" value="<?= $row['id_meja'] ?>">
-                                <input type="hidden" name="total" value="<?= $row['total'] ?>">
+                                <input type="hidden" name="status" value="<?= $row['status'] ?>">
                                 <button type="submit" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</button>
                             </form>
 
