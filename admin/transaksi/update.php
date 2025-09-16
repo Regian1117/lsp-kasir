@@ -15,6 +15,7 @@ if (isset($_POST['simpan'])) {
     $stmt->execute();
     $stmt->close();
     header('Location: index.php?page=transaksi');
+    exit();
 }
 ?>
 

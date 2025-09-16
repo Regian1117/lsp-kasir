@@ -55,6 +55,7 @@ $result = $stmt->get_result();
                             <!-- Form Hapus -->
                             <form method="post" action="?page=transaksi&action=hapus">
                                 <input type="hidden" name="id_transaksi" value="<?= $row['id'] ?>">
+                                <input type="hidden" name="kode_transaksi" value="<?=$row['kode_transaksi']?>">
                                 <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Hapus</button>
                             </form>
 
