@@ -9,3 +9,4 @@ include 'includes/header.php';
 include 'admin/router.php';
 
 ?>
+<link rel="stylesheet" href="globals.css">
