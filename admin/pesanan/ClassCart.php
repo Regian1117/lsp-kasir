@@ -105,6 +105,33 @@ class Cart
         }
     }
 
+    public function getTotalHarga(){
+        $total = 0;
+        foreach ($_SESSION[$this->sessionKey] as $c) {
+            $total += $c['subtotal'];
+        }
+        return $total;
+    }
+
+    public function pesan($id_transaksi){
+        $stmt = $this->koneksi->prepare("delete from pesanan where id_transaksi=?");
+        $stmt->bind_param('i', $id_transaksi);
+        if($stmt->execute()){
+            foreach ($_SESSION[$this->sessionKey] as $c) {
+                $stmt = $this->koneksi->prepare("insert into pesanan (id_transaksi, id_menu, jumlah, harga, subtotal) values (?,?,?,?,?)");
+                $stmt->bind_param('iiiii', $id_transaksi, $c['id_menu'], $c['jumlah'], $c['harga'], $c['subtotal']);
+                $stmt->execute();
+            }
+            // update total di transaksi
+            $total = $this->getTotalHarga();
+            $stmt = $this->koneksi->prepare("update transaksi set total=? where id=?");
+            $stmt->bind_param('di', $total, $id_transaksi);
+            $stmt->execute();
+            $stmt->close();
+            return true;
+        }
+    }
+
     public function clear()
     {
         $_SESSION[$this->sessionKey] = [];
