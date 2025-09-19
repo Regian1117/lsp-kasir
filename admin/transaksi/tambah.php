@@ -2,7 +2,7 @@
 if (isset($_POST['tambah'])) {
     $nama_pelanggan = $_POST['nama_pelanggan'] ?? '';
     $id_meja        = $_POST['id_meja'];
-    $total          = $_POST['total'] ?? 0;
+    $total          = 0;
     $status         = $_POST['status'];
 
     // kode transaksi bisa auto-generate
@@ -52,14 +52,6 @@ if (isset($_POST['tambah'])) {
                     <option value="<?= $m['id'] ?>"><?= $m['nomor_meja'] ?></option>
                 <?php endwhile; ?>
             </select>
-        </div>
-
-        <!-- Total Harga -->
-        <div>
-            <label for="total" class="block text-sm font-medium text-gray-700">Total Harga</label>
-            <input type="number" name="total" id="total"
-                class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500"
-                required>
         </div>
 
         <!-- Status -->

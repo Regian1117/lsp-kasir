@@ -19,6 +19,9 @@ function getPesanan($koneksi, $id)
             <h1>meja : <?= $row['nomor_meja'] ?> Nama : <?= $row['nama_pelanggan'] ?></h1>
             <?php $hasil = getPesanan($koneksi, $row['id']); ?>
             <div class="flex gap-3">
+                <?php if($hasil->num_rows === 0):?>
+                    <h1 class="p2 border w-60 h-50 flex items-center justify-center font-semibold">Belum ada pesanan</h1>
+                <?php endif;?>
                 <?php while ($row_pesanan = $hasil->fetch_assoc()): ?>
                     <div class="p-2 border">
                         <img src="<?=$row_pesanan['foto']?>" class="w-60 h-40 bg-fill">
