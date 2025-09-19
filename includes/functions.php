@@ -75,4 +75,7 @@ function generateKodeTransaksi($conn) {
     return $prefix . "-" . $newNumber;
 }
 
+function formatRupiah($amount) {
+    return 'Rp ' . number_format($amount, 0, ',', '.');
+}
 ?>

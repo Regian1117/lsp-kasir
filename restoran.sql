@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Sep 2025 pada 04.22
+-- Waktu pembuatan: 19 Sep 2025 pada 05.32
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -45,7 +45,7 @@ INSERT INTO `meja` (`id`, `nomor_meja`, `status`) VALUES
 (5, 5, 'terisi'),
 (6, 6, 'kosong'),
 (7, 7, 'kosong'),
-(8, 8, 'kosong'),
+(8, 8, 'terisi'),
 (13, 28, 'reserved'),
 (14, 69, 'terisi');
 
@@ -95,12 +95,12 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id`, `id_transaksi`, `id_menu`, `jumlah`, `harga`, `subtotal`) VALUES
-(1, 1, 2, 1, 22000, 22000),
-(2, 1, 4, 1, 10000, 10000),
-(3, 1, 1, 1, 10000, 10000),
-(4, 2, 5, 1, 696969, 696969),
-(5, 2, 4, 50, 10000, 500000),
-(6, 1, 2, 1, 22000, 22000);
+(8, 1, 2, 3, 22000, 66000),
+(9, 1, 4, 2, 10000, 20000),
+(10, 1, 1, 1, 10000, 10000),
+(11, 1, 3, 1, 89000, 89000),
+(12, 2, 5, 69, 696969, 48090861),
+(13, 2, 4, 50, 10000, 500000);
 
 -- --------------------------------------------------------
 
@@ -124,8 +124,9 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `kode_transaksi`, `id_user`, `id_meja`, `total`, `status`, `created_at`, `nama_pelanggan`) VALUES
-(1, 'TRX20250914-001', 4, 4, 64000, 'pending', '2025-09-14 06:49:38', 'The King'),
-(2, 'TRX20250914-002', 4, 5, 1196969, 'pending', '2025-09-14 07:33:10', 'arka');
+(1, 'TRX20250914-001', 4, 4, 185000, 'pending', '2025-09-14 06:49:38', 'The King'),
+(2, 'TRX20250914-002', 4, 5, 48590861, 'pending', '2025-09-14 07:33:10', 'arka'),
+(4, 'TRX20250919-001', 4, 8, 0, 'pending', '2025-09-19 03:05:13', 'julioyo');
 
 -- --------------------------------------------------------
 
@@ -212,13 +213,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
