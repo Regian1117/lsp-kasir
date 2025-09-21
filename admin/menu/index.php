@@ -23,7 +23,7 @@ $minuman = getMenu('minuman');
                 <img src="<?= $row['foto'] ?>" alt="foto makanan" class="w-full h-40 object-cover">
                 <div class="">
                     <h3 class="text-xl"><?= $row['nama_menu'] ?></h3>
-                    <h2 class="text-lg"><?= number_format($row['harga'], 0, ',', '.') ?></h2>
+                    <h2 class="text-lg"><?= formatRupiah($row['harga']) ?></h2>
                     <p class="text-xs">stok : <?= $row['stok'] ?></p>
                 </div>
                 <div class="flex gap-2">
